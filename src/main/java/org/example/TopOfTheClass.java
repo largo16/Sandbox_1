@@ -78,13 +78,15 @@ public class TopOfTheClass {
 
         // Print out the top four students
 
+        ArrayList<String> tempList = new ArrayList<>();
         int count = 0;
         for (Object entry : scoreMap.keySet()) {
             if (count > 3) break;
-            System.out.println(entry);
+            tempList.add(entry.toString());
             count++;
         }
 
+        System.out.println(tempList);
 
     }
 
