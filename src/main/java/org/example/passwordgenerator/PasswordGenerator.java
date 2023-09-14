@@ -1,7 +1,6 @@
-package org.example;
+package org.example.passwordgenerator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.security.SecureRandom;
 import java.util.Scanner;
@@ -16,12 +15,12 @@ public class PasswordGenerator {
      * - At least 12 characters long
      * - a combination of uppercase letters, lowercase letters, numbers and symbols
      * - includes no words that can be found in a dictionary
-     *
+     * <p>
      * Strategy
      * One way is to have a randomizer that simply chooses an ascii value (or whatever is used
      * nowadays) to generate d character beit a digit, letter or symbol from a range in the
      * allowable character set
-     *
+     * <p>
      * The other might be to have several subprograms which will return a character of a certain
      * type when called, then to randomize calling of those modules.
      */
@@ -58,6 +57,7 @@ public class PasswordGenerator {
 
             }
         }
+        keyboard.close();
         System.out.println("Program exiting.");
 
 
@@ -93,7 +93,6 @@ public class PasswordGenerator {
 
     public static String generatePassword2() {
 
-        Random aRandom = new Random();
         StringBuilder result = new StringBuilder();
         int minPasswordLength = getRandomNumberInRange(12, 20);
         while (result.length() < minPasswordLength) {
@@ -129,7 +128,7 @@ public class PasswordGenerator {
     public static class RandomCharacter {
         /** Generate a random character between ch1 and ch2 */
 
-        private static SecureRandom secureRandom = new SecureRandom();
+        private static final SecureRandom secureRandom = new SecureRandom();
         public static char getRandomCharacter (char c1, char c2) {
             return (char) (c1 + secureRandom.nextFloat() * (c2 - c1 + 1) );
         }
@@ -217,7 +216,7 @@ public class PasswordGenerator {
     public static ArrayList<Boolean> queryResultArray() {
 
         ArrayList<Boolean> resultArray = new ArrayList<>();
-        String input = null;
+        String input;
 
         System.out.println("Do you want lowercase letters in your password?");
         if (keyboard.next().equals("Yes")) {
